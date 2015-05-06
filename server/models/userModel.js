@@ -2,16 +2,28 @@ var mongoose = require('mongoose');
 var db = require('../db.js');
 
 var UserSchema = new mongoose.Schema({
-  username: {
-    type: String,
+  fbId: {
+    type: Number,
     required: true,
     unique: true
   },
 
-  password: {
+  firstName: {
     type: String,
     required: true
   },
+
+  lastName: {
+    type: String,
+    required: false
+  },
+
+  imageUrl: {
+    type: String,
+    required: false
+  }
+
+
 
 });
 

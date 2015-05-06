@@ -5,16 +5,20 @@ var db = require('../db.js')
 var userController = {
 
 signupUser: function(req, res) {
-  var username = req.body.username;
-  var password = req.body.password;
 
-  User.findOne({ username: username })
+  var firstName = req.body.firstName;
+  var lastName = req.body.lastName;
+  var fbId = req.body.fbId;
+  var imageUrl = req.body.imageUrl;
+
+  User.findOne({ fbId: fbId })
     .exec(function(err, user) {
       if (!user) {
-        console.log(username + " " + password);
         var newUser = new User({
-          username: username,
-          password: password
+          fbId: fbId,
+          firstName: firstName,
+          lastName: lastName,
+          imageUrl: imageUrl
         });
         newUser.save(function(err, newUser) {
           if (err) {
