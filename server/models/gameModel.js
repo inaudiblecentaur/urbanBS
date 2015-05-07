@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var db = require('../db.js');
 
-var Game = new mongoose.Schema({
+var GameSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -18,7 +18,7 @@ var Game = new mongoose.Schema({
     type: Array,
     required: true,
     unique: false
-  }
+  },
 
   dealer: {
     type: String,
@@ -43,6 +43,11 @@ var Game = new mongoose.Schema({
   invited: {
     type: Array,
     required: false
+  },
+
+  isComplete: {
+    type:Boolean,
+    required: true
   }
 
 });

@@ -1,8 +1,9 @@
 var express = require("express");
 var session = require("express-session");
 var bodyParser = require('body-parser');
-var userController = require('./controllers/userController.js');
 var gameData = require('./routes/gameData')
+var userController = require('./controllers/userController.js');
+var gameController = require('./controllers/gameController.js');
 
 var app = express();
 app.use(bodyParser.urlencoded({
@@ -18,7 +19,7 @@ app.all('*', function(req, res, next) {
 });
 
 app.get('/', function(req, res) {
-    res.writeHead(200, headers);
+    res.writeHead(200);
     res.end();
 });
 
@@ -29,6 +30,15 @@ app.post('/signup', function(req, res) {
 app.get('/gamedata', gameData.findAll);
 app.get('/gamedata/:id', gameData.findById);
 app.get('/invites', gameData.getInvites);
+
+app.get('/listGames', function(req, res) {
+  gameController.listGames(req, res)
+});
+
+app.post('/addGame', function(req, res) {
+  console.log('hit')
+  gameController.createGame(req, res)
+});
 
 
 var port = process.env.PORT || 3000;
