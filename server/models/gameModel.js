@@ -8,15 +8,43 @@ var Game = new mongoose.Schema({
     unique: true
   },
 
+  gameId: {
+  	type: Number,
+  	required: true,
+  	unique: true
+  },
+
+  players: {
+  	type: Array,
+  	required: true,
+  	unique: false
+  },
+
   dealer: {
     type: String,
     required: true
   },
 
-  word: {
+  curentQuestion: {
   	type: String,
-  	required: true
+  	required: false
+  },
+
+  answer: {
+  	type: String,
+  	required: false
+  },
+
+  round: {
+  	type: Number,
+  	required: false
+  },
+
+  invited: {
+  	type: Array,
+  	required: false
   }
+
 
 });
 
