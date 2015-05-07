@@ -16,4 +16,4 @@ var QuestionSchema = new mongoose.Schema({
 });
 
 
-module.exports = mongoose.model('Question', UserSchema);
+module.exports = mongoose.model('Question', QuestionSchema);
