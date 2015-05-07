@@ -28,8 +28,7 @@ app.post('/signup', function(req, res) {
 
 app.get('/gamedata', gameData.findAll);
 app.get('/gamedata/:id', gameData.findById);
-app.get('/gamedata/invites', gameData.getInvites);
-
+app.get('/invites', gameData.getInvites);
 
 
 var port = process.env.PORT || 3000;
