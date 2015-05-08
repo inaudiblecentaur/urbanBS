@@ -31,7 +31,19 @@ signupUser: function(req, res) {
         res.end();
       }
     });
+  },
+
+  retrieveUsers: function(req, res) {
+    User.find({}, function(err, data) {
+      if (!err) { 
+          res.send(200, data);
+      } 
+      else {
+        throw err;
+      }
+    });
   }
+
 };
 
 module.exports = userController;

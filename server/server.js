@@ -1,15 +1,27 @@
 var express = require("express");
 var session = require("express-session");
 var bodyParser = require('body-parser');
-var gameData = require('./routes/gameData')
+var gameData = require('./routes/gameData');
 var userController = require('./controllers/userController.js');
 var gameController = require('./controllers/gameController.js');
 
 var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+
+io.sockets.on('connection', function(socket) {
+  console.log('socket connected');
+
+  socket.on('disconnect', function() {
+    console.log('socket disconnected');
+  });
+
+  socket.emit('text', 'wow. such event. very real time');
+})
 
 app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -27,7 +39,10 @@ app.post('/signup', function(req, res) {
   userController.signupUser(req, res)
 });
 
-app.get('/gamedata', gameData.findAll);
+app.get('/listUsers', function(req, res) {
+  userController.retrieveUsers(req, res);
+}); 
+
 app.get('/gamedata/:id', gameData.findById);
 app.get('/invites', gameData.getInvites);
 

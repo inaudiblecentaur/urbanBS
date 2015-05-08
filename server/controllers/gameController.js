@@ -3,9 +3,9 @@ var mongoose = require('mongoose');
 var db = require('../db.js')
 
 var gameController = {
-// curl -H "Content-Type: application/json" -X POST -d '{"name": "Ray's game", "gameId": "0", "players": "[]", "currentQuestion": "null", "round": "0", "dealer": "null"}' http://localhost:3000/addGame
-// '{"name": "Ray's game", "gameId": "0", "players": "[]", "currentQuestion": "null", "round": "0", "dealer": "null"}'
+  
 createGame: function(req, res) {
+  console.log(req.body);
   var name = req.body.name;
   var gameId = req.body.gameId;
   var players = req.body.players || [];
@@ -13,6 +13,7 @@ createGame: function(req, res) {
   var currentQuestion = req.body.currentQuestion || 'null';
   var answer = req.body.answer || 'null';
   var invited = req.body.invited || [];
+  var roundLimit = +req.body.roundLimit;
 
   Game.findOne({ gameId: gameId })
     .exec(function(err, game) {
@@ -26,7 +27,8 @@ createGame: function(req, res) {
           answer: answer,
           round: 0,
           invited: invited,
-          isComplete: false
+          isComplete: false,
+          roundLimit: roundLimit
         });
         newGame.save(function(err, newGame) {
           if (err) {

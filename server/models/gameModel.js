@@ -45,6 +45,11 @@ var GameSchema = new mongoose.Schema({
     required: false
   },
 
+  roundLimit: {
+    type: Number,
+    required: true
+  },
+
   isComplete: {
     type:Boolean,
     required: true
