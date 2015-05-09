@@ -5,7 +5,7 @@ var db = require('../db.js')
 var userController = {
 
 signupUser: function(req, res) {
-
+  console.log(req.body);
   var firstName = req.body.firstName;
   var lastName = req.body.lastName;
   var fbId = req.body.fbId;
@@ -22,6 +22,7 @@ signupUser: function(req, res) {
         });
         newUser.save(function(err, newUser) {
           if (err) {
+            console.log(err);
             res.send(500, err);
           }
           res.json(newUser)
