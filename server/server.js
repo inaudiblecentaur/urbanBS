@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var gameData = require('./routes/gameData');
 var userController = require('./controllers/userController.js');
 var gameController = require('./controllers/gameController.js');
-var questionController = require('./controllers/questionController.js')
+var questionController = require('./controllers/questionController.js');
 
 var app = express();
 var server = require('http').Server(app);
