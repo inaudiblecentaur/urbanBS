@@ -48,12 +48,43 @@ createGame: function(req, res) {
   listGames: function(req, res) {
     Game.find({}, function(err, data) {
       if (!err) { 
+        console.log(data)
           res.send(200, data);
       } 
       else {
         throw err;
       }
     });
+  },
+
+  invitePlayers: function(req, res) {
+    console.log(req.body);
+    Game.findOne({name: req.body.name})
+    .exec(function(err, game) {
+      if (!err) {
+        var bool = true;
+        game.invited.forEach(function(player) {
+          if (!bool) {
+            res.end();
+            return;
+          }
+          else if (player.fbId === req.body.fbId) {
+            console.log('already invited');
+            bool = false;
+          }
+        });
+
+        if (bool) {
+            console.log()
+            game.invited.push(req.body);
+            res.end();
+          }
+      }
+      else {
+        console.log('error inviting player: ' + err);
+        res.send(500, err);
+      }
+    })
   }
 
 };

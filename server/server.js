@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var gameData = require('./routes/gameData');
 var userController = require('./controllers/userController.js');
 var gameController = require('./controllers/gameController.js');
+var questionController = require('./controllers/questionController.js');
 
 var app = express();
 var server = require('http').Server(app);
@@ -20,7 +21,6 @@ io.sockets.on('connection', function(socket) {
     console.log('socket disconnected');
   });
 
-  socket.emit('text', 'wow. such event. very real time');
 })
 
 app.all('*', function(req, res, next) {
@@ -43,8 +43,9 @@ app.get('/listUsers', function(req, res) {
   userController.retrieveUsers(req, res);
 }); 
 
-app.get('/gamedata/:id', gameData.findById);
-app.get('/invites', gameData.getInvites);
+app.post('/invitePlayer', function(req, res) {
+  gameController.invitePlayers(req, res);
+});
 
 app.get('/listGames', function(req, res) {
   gameController.listGames(req, res)
@@ -54,6 +55,26 @@ app.post('/addGame', function(req, res) {
   console.log('hit')
   gameController.createGame(req, res)
 });
+
+app.get('/currentQuestion', function(req, res) {
+  console.log('getting current question')
+  questionController.getQuestion(req, res);
+});
+
+app.post('/submitAnswer', function(req, res) {
+  console.log(req.body);
+  questionController.submitAnswer(req, res);
+});
+
+app.get('/getAnswer', function(req, res) {
+  console.log(req.body);
+  questionController.getAnswer(req, res);
+});
+
+app.get('/endGame', function(req, res) {
+  console.log(req.body);
+  questionController.endGame(req, res);
+})
 
 
 var port = process.env.PORT || 3000;
