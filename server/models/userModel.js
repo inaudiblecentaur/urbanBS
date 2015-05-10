@@ -21,6 +21,16 @@ var UserSchema = new mongoose.Schema({
   imageUrl: {
     type: String,
     required: false
+  },
+
+  score: {
+    type: Number,
+    required: true
+  },
+
+  answer: {
+    type: Boolean,
+    required: false
   }
 
 

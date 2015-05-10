@@ -18,7 +18,8 @@ signupUser: function(req, res) {
           fbId: fbId,
           firstName: firstName,
           lastName: lastName,
-          imageUrl: imageUrl
+          imageUrl: imageUrl,
+          score: 0
         });
         newUser.save(function(err, newUser) {
           if (err) {
@@ -43,6 +44,27 @@ signupUser: function(req, res) {
         throw err;
       }
     });
+  },
+
+  answerQuestion: function(req, res) {
+    if (req.body.fbId) {
+      var answer = req.body.answer;
+      User.find({fbId: req.body.fbId})
+      .exec(function(err, user) {
+        if(!err) {
+          user.answer = answer;
+          res.end();
+        }
+        else {
+          console.log('there was an error submitting question: ' + err);
+          res.send(500, err);
+        }
+      })
+    }
+    else {
+      console.log('no player');
+      res.end();
+    }
   }
 
 };
