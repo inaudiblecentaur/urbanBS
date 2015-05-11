@@ -7,12 +7,13 @@ var GameSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-
+/*
   gameId: {
     type: Number,
     required: true,
     unique: true
   },
+  */
 
   players: {
     type: Object,
