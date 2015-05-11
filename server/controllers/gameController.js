@@ -20,7 +20,6 @@ createGame: function(req, res) {
       if (!game) {
         var newGame = new Game({
           name: name,
-          gameId: gameId,
           players: players,
           dealer: dealer,
           currentQuestion: currentQuestion,
