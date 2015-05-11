@@ -31,6 +31,11 @@ var UserSchema = new mongoose.Schema({
   answer: {
     type: Boolean,
     required: false
+  },
+
+  isDealer: {
+    type: Boolean,
+    required: false
   }
 
 

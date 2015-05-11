@@ -15,7 +15,7 @@ var GameSchema = new mongoose.Schema({
   },
 
   players: {
-    type: Array,
+    type: Object,
     required: true,
     unique: false
   },
@@ -41,7 +41,7 @@ var GameSchema = new mongoose.Schema({
   },
 
   invited: {
-    type: Array,
+    type: Object,
     required: false
   },
 
