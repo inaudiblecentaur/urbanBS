@@ -15,7 +15,7 @@ createGame: function(req, res) {
   var invited = req.body.invited || [];
   var roundLimit = +req.body.roundLimit;
 
-  Game.findOne({ gameId: gameId })
+  Game.findOne({ name: name })
     .exec(function(err, game) {
       if (!game) {
         var newGame = new Game({
