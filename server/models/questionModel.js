@@ -2,15 +2,18 @@ var mongoose = require('mongoose');
 var db = require('../db.js');
 
 var QuestionSchema = new mongoose.Schema({
-  question: {
+
+  word: {
+    type: String,
+    required: true,
+    unique: true
+  },
+
+  definition: {
     type: String,
     required: true
   },
 
-  answer: {
-    type: String,
-    required: true
-  },
 
   submittedAnswer: {
     type: String,
@@ -25,3 +28,4 @@ var QuestionSchema = new mongoose.Schema({
 
 
 module.exports = mongoose.model('Question', QuestionSchema);
+
