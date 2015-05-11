@@ -41,7 +41,7 @@ var GameSchema = new mongoose.Schema({
   },
 
   invited: {
-    type: Array,
+    type: Object,
     required: false
   },
 
